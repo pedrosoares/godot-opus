@@ -1,0 +1,18 @@
+[package]
+name = "godot_opus"
+description = "Opus voice encoder/decoder for Godot 4 (GDExtension)."
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+godot = "0.4.5"
+opus2 = { version = "0.4.0", default-features = false, features = ["backend-libopus", "static", "bundled"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
