@@ -23,10 +23,17 @@ unsafe impl ExtensionLibrary for GodotOpus {}
 /// Encodes 20 ms frames of PCM (floats in [-1, 1], interleaved when
 /// stereo) into Opus packets.
 #[derive(GodotClass)]
-#[class(base=RefCounted, init)]
+#[class(base=RefCounted)]
 pub struct OpusEncoder {
     base: Base<RefCounted>,
     inner: Option<VoiceEncoder>,
+}
+
+#[godot_api]
+impl IRefCounted for OpusEncoder {
+    fn init(base: Base<RefCounted>) -> Self {
+        Self { base, inner: None }
+    }
 }
 
 #[godot_api]
@@ -78,10 +85,17 @@ impl OpusEncoder {
 
 /// Decodes Opus packets back to PCM (floats, interleaved when stereo).
 #[derive(GodotClass)]
-#[class(base=RefCounted, init)]
+#[class(base=RefCounted)]
 pub struct OpusDecoder {
     base: Base<RefCounted>,
     inner: Option<VoiceDecoder>,
+}
+
+#[godot_api]
+impl IRefCounted for OpusDecoder {
+    fn init(base: Base<RefCounted>) -> Self {
+        Self { base, inner: None }
+    }
 }
 
 #[godot_api]
